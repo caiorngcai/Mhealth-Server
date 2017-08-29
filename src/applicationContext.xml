@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://www.springframework.org/schema/beans" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:aop="http://www.springframework.org/schema/aop" 
+xmlns:tx="http://www.springframework.org/schema/tx" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+					http://www.springframework.org/schema/context 
+					http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+				 	http://www.springframework.org/schema/aop 
+				 	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+				 	http://www.springframework.org/schema/tx 
+				  	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+				 	
+	<context:property-placeholder location="classpath:db.properties" />
+	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<!-- spring内置c3po的属性注入方式 -->
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" ></property>
+		<property name="driverClass" value="${jdbc.driverClass}" ></property>
+		<property name="user" value="${jdbc.user}" ></property>
+		<property name="password" value="${jdbc.password}" ></property>
+	</bean>
+	<!-- 配置aop事务 -->
+	<bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配制事务操作注解模式 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+		<props>
+			<prop key="hibernate.dialect" >org.hibernate.dialect.MySQLDialect</prop>
+				
+				<!--  可选配置 -->
+				<prop key="hibernate.show_sql" >true</prop>
+				<prop key="hibernate.format_sql" >true</prop>
+				<prop key="hibernate.hbm2ddl.auto" >update</prop>
+		</props>
+		</property>
+		<property name="mappingDirectoryLocations" value="classpath:com/cai/domain"></property>
+	</bean>
+	
+	
+	<bean name="patientService" class="com.cai.service.PatientServiceImpl">
+		<property name="patientDao" ref="patientDao"></property>
+	</bean>
+	
+	<bean name="doctorService" class="com.cai.service.DoctorServiceImpl">
+		<property name="doctorDao" ref="doctorDao"></property>
+	</bean>
+	<bean name="healthInfoService" class="com.cai.service.HealthInfoServiceImpl">
+		<property name="healthInfoDao" ref="healthInfoDao"></property>
+	</bean>
+	<bean name="doctorDao" class="com.cai.dao.DoctordaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean name="patientDao" class="com.cai.dao.PatientDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean name="healthInfoDao" class="com.cai.dao.HealthInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+</beans>

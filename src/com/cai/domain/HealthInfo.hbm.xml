@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+   <hibernate-mapping package="com.cai.domain" >
+	
+	<class name="HealthInfo" table="healthInfo" >
+		
+		<id name="info_id"  >
+			<!-- generator:主键生成策略(明天讲) -->
+			<generator class="native"></generator>
+		</id>
+	
+		<property name="spressure"></property>
+		<property name="dpressure"></property>
+		<property name="temperature"></property>
+		<property name="bsugar"></property>
+		<property name="boxygen"></property>
+		<property name="hearterate"></property>
+		<property name="preresult"></property>
+		<property name="loginname"></property>
+		<property name="regDate" type="java.sql.Timestamp" generated="never">
+			<column name="regdate" sql-type="timestamp" default="CURRENT_TIMESTAMP" ></column>  
+		</property>
+	</class>
+</hibernate-mapping>

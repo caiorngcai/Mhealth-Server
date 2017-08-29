@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+  
+<hibernate-mapping package="com.cai.domain" >
+	
+	<class name="Doctor" table="doctor" >
+		
+		<id name="doc_id"  >
+			<!-- generator:主键生成策略(明天讲) -->
+			<generator class="native"></generator>
+		</id>
+	
+		<property name="realname"></property>
+		<property name="level"></property>
+		<property name="hospital"></property>
+		<property name="department"></property>
+		<property name="phone"></property>
+		<property name="mobile"></property>
+		<property name="loginname"></property>
+		<property name="password"></property>
+		<set name="patients">
+		<key column="doc_pat_id"></key>
+		<one-to-many class="com.cai.domain.Patient"/>
+		</set>
+	</class>
+</hibernate-mapping>

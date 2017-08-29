@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	
+	 <filter>
+  	<filter-name>openSessionInView</filter-name>
+  	<filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
+  </filter>
+	
+	<filter-mapping>
+  	<filter-name>openSessionInView</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+	
+	 <servlet>
+    <servlet-name>PatientRegister</servlet-name>
+    <servlet-class>com.cai.web.PatientRegister</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DoctorRegister</servlet-name>
+    <servlet-class>com.cai.web.DoctorRegister</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DoctorLogin</servlet-name>
+    <servlet-class>com.cai.web.DoctorLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PatientList</servlet-name>
+    <servlet-class>com.cai.web.PatientList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PatientListByName</servlet-name>
+    <servlet-class>com.cai.web.PatientListByName</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HealthInfo</servlet-name>
+    <servlet-class>com.cai.web.HealthInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HealthInfoList</servlet-name>
+    <servlet-class>com.cai.web.HealthInfoList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Diagnose</servlet-name>
+    <servlet-class>com.cai.web.Diagnose</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>PatientRegister</servlet-name>
+    <url-pattern>/PatientRegister</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DoctorRegister</servlet-name>
+    <url-pattern>/DoctorRegister</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DoctorLogin</servlet-name>
+    <url-pattern>/DoctorLogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PatientList</servlet-name>
+    <url-pattern>/PatientList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PatientListByName</servlet-name>
+    <url-pattern>/PatientListByName</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HealthInfo</servlet-name>
+    <url-pattern>/HealthInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HealthInfoList</servlet-name>
+    <url-pattern>/HealthInfoList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Diagnose</servlet-name>
+    <url-pattern>/Diagnose</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
